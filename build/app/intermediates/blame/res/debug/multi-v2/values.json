@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\map\\myPractice\\wejog1\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\map\\wejogP1\\p1\\wejog\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
+                {
+                    "source": "C:\\map\\wejogP1\\p1\\wejog\\android\\app\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endColumns": "44",
+                        "endOffsets": "97"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "116",
+                        "endColumns": "44",
+                        "endOffsets": "156"
+                    }
+                },
                 {
                     "source": "C:\\Users\\zheung yik\\.gradle\\caches\\transforms-2\\files-2.1\\0a271e99b6771ad4a84318244d532fb7\\core-1.0.0\\res\\values\\values.xml",
                     "from": {
@@ -23,24 +40,7 @@
                     }
                 },
                 {
-                    "source": "C:\\map\\myPractice\\wejog1\\android\\app\\src\\main\\res\\values\\colors.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endColumns": "44",
-                        "endOffsets": "97"
-                    },
-                    "to": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "116",
-                        "endColumns": "44",
-                        "endOffsets": "156"
-                    }
-                },
-                {
-                    "source": "C:\\map\\myPractice\\wejog1\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\map\\wejogP1\\p1\\wejog\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

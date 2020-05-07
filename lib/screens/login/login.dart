@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
             LoginScreenInputs(ctrl: passwordController, hint: "Enter your password", label: "Password", isPassword: true,), //password box
 
             LoginButton(nameCtrl: usernameController, passwordCtrl: passwordController), //login button
-            RegisterButton(), //register button (not yet usable)
+            RegisterButton(),
             
           ],
         ),

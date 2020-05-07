@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wejog1/screens/home/index.dart';
+import 'package:wejog1/screens/login/register.dart';
 
 /*login screen input boxes*/
 class LoginScreenInputs extends StatelessWidget {
@@ -88,7 +89,10 @@ class RegisterButton extends StatelessWidget {
                 width: double.infinity,
                 child: RaisedButton.icon(
                 onPressed: (){
-                  
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Register()),
+                  );
                 }, 
                 icon: Icon(Icons.account_circle), 
                 label: Text("Create an account"),

@@ -2,8 +2,8 @@ Title
 ========
 WeJog
 
-<h3><b>Prototype 2 Video</b></h3>
-To be added
+<h1><b>Prototype 2 Video</b></h1>
+https://www.youtube.com/watch?v=4dfxWRfx3eM&feature=youtu.be
 
 Prototype 1 Video
 ================

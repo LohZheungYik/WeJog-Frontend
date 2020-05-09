@@ -41,32 +41,6 @@ class BloodPressureInputs extends StatelessWidget {
   }
 }
 
-class SaveBpButton extends StatelessWidget {
-  final sys, dia, pulse;
-  SaveBpButton({this.sys, this.dia, this.pulse});
-  
-  @override
-  Widget build(BuildContext context) {
-    return MaterialButton(
-            color: Colors.green,
-            onPressed: (){
-              BloodPressure bp = new BloodPressure(
-                int.parse(sys),
-                int.parse(dia),
-                int.parse(pulse),
-                DateTime.now()
-              );
-
-              Navigator.of(context).pop(bp);
-            },
-            child: Text("Save", style: 
-              TextStyle(
-                color: Colors.white,
-              ),),  
-          );
-  }
-}
-
 class BloodPressureGraph extends StatelessWidget {
   final lineData;
   BloodPressureGraph({this.lineData});

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wejog1/model/BloodPressure.dart';
 import 'package:wejog1/screens/home/app_bar.dart';
 import 'package:wejog1/widgets/bpRecorderWidgets.dart';
 
@@ -33,11 +34,24 @@ class BloodPressureRecorder extends StatelessWidget {
              ctrl: pulseController,
            ),
            SizedBox(height: 20,),
-           SaveBpButton(
-             sys: sysController.text,
-             dia: diaController.text,
-             pulse: pulseController.text,
-           ),
+           MaterialButton(
+            color: Colors.green,
+            onPressed: (){
+              BloodPressure bp = new BloodPressure(
+                int.parse(sysController.text),
+                int.parse(diaController.text),
+                int.parse(pulseController.text),
+                DateTime.now()
+              );
+
+              Navigator.of(context).pop(bp);
+              
+            },
+            child: Text("Save", style: 
+              TextStyle(
+                color: Colors.white,
+              ),),  
+          ),
          ],
        ),
       ),

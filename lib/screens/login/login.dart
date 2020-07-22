@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wejog1/widgets/loginWidgets.dart';
+import 'package:wejog1/screens/home/dashboard.dart';
+import 'package:wejog1/screens/login/provider.dart';
+import 'package:wejog1/widgets/login_widgets.dart';
 
 class Login extends StatefulWidget {
   const Login({Key key}) : super(key: key);
@@ -8,7 +10,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  var usernameController = new TextEditingController();
+  var emailController = new TextEditingController();
   var passwordController = new TextEditingController();
   
   
@@ -24,19 +26,55 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 50
             ),
-            LoginScreenInputs(ctrl: usernameController, hint: "Enter your username", label: "Username", isPassword: false,), //username box
+            LoginScreenInputs(ctrl: emailController, hint: "Enter your email", label: "E-mail", isPassword: false,), //email box
             SizedBox(
               height: 20
             ),
             LoginScreenInputs(ctrl: passwordController, hint: "Enter your password", label: "Password", isPassword: true,), //password box
 
-            LoginButton(nameCtrl: usernameController, passwordCtrl: passwordController), //login button
+            //LoginButton(nameCtrl: emailController, passwordCtrl: passwordController), //login button
+             Builder(
+                  builder: (context)=> SizedBox(
+                  width: double.infinity,
+                  child: RaisedButton.icon(
+                  onPressed: (){
+                    submitLogin(emailController.text, passwordController.text, context);
+                  },
+                  icon: Icon(Icons.exit_to_app), 
+                  label: Text("Login"),
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                  
+                ),
+              ),
+            ), 
+            
             RegisterButton(),
             
           ],
         ),
       )
     );
+  }
+
+    void submitLogin(String email, String password, BuildContext c) async{
+    try{
+      final auth = Provider.of(context).auth;
+      String userId = await auth.signInWithEmailAndPassword(
+        //emailController.text, passwordController.text
+        email, password
+      );
+      print(userId + " logged in");
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => Dashboard(userId: userId)),
+      );
+    }catch(e){
+      //print(e);
+      final scaffold = Scaffold.of(c);
+      scaffold.showSnackBar(SnackBar(
+        content: Text(e.toString()),
+      ));
+    }
   }
 }
 

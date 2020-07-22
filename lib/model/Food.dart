@@ -1,13 +1,18 @@
+//Food Class
+
 class Food{
   String name;
   double calories;
-  int _serving = 0;
+  int serving = 0;
+  List nutritions; 
 
-  Food(this.name, this.calories);
-  set serving(int s){
-    _serving = s;
-  }
-  int get serving{
-    return _serving;
-  }
+  Food(this.name, this.nutritions);
+
+  Food.fromJson(Map<String, dynamic> json)
+      :this(
+        json['description'],
+        json['foodNutrients'],
+  );
+
 }
+

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "896203586497",
+    "firebase_url": "https://wejogmobile.firebaseio.com",
+    "project_id": "wejogmobile",
+    "storage_bucket": "wejogmobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896203586497:android:22f389cd11b2c0db6e4d40",
+        "android_client_info": {
+          "package_name": "com.example.wejog1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "896203586497-gg6uuvrdphgfm6uimr4b9dnaltdcnv86.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbgr_8WovKBAi5AQ10isCzJp8t4T-6RxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "896203586497-gg6uuvrdphgfm6uimr4b9dnaltdcnv86.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

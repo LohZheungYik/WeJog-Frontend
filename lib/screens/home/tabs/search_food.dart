@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:wejog1/model/food.dart';
 import 'package:wejog1/model/serving.dart';
@@ -34,7 +36,7 @@ class _SearchState extends State<Search> {
   
   //search Food API
   search(String value) async{
-   
+    createSavingDialog(context);
     FoodApiSearchDataService fs = FoodApiSearchDataService();
     foodList = await fs.getFoodSearchResults(value.toUpperCase());
 
@@ -102,6 +104,33 @@ class _SearchState extends State<Search> {
   ),
 ),
     );
-}}
+}
+
+Future <String> createSavingDialog(BuildContext context){
+    Timer(
+      Duration(seconds: 2),
+      () async{
+         Navigator.of(context).pop();
+      },
+    );
+    return showDialog(context: context, builder: (context){
+      return AlertDialog(
+        content: SizedBox(
+          height: 250,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget> [
+              CircularProgressIndicator(),
+              Text("Searching... Please Wait")
+            ]
+          ),
+        ),
+      );
+
+    });
+  }
+
+
+}
 
 

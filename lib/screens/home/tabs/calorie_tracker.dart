@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:wejog1/model/serving.dart';
 import 'package:wejog1/screens/home/app_bar.dart';
@@ -26,7 +28,7 @@ class _CalorieTrackerState extends State<CalorieTracker> {
       MaterialPageRoute(
         builder: (context) => Search(userId: widget.userId)
       ));
-    
+    createSavingDialog(context);
     bool exist = false;
     Serving existingFood = Serving();
     int existingIndex = 0; 
@@ -120,19 +122,26 @@ class _CalorieTrackerState extends State<CalorieTracker> {
                           children: <Widget>[
                             IconButton(
                               onPressed: () async{
+                                createSavingDialog(context);
                                 eatenFood[index].number++;
                                 calculateTotalCalorie();
                                 await c.updateServingRecord(id: eatenFood[index].id, serving: eatenFood[index]);
+                                
                                 setState(() {});
                               },
                               icon: Icon(Icons.add),
                             ),
                             IconButton(
                               onPressed: () async{
-                                if (eatenFood[index].number > 0) eatenFood[index].number--;
+                                if (eatenFood[index].number > 0) {
+                                
+                                createSavingDialog(context);
+                                eatenFood[index].number--;
                                 calculateTotalCalorie();
                                 await c.updateServingRecord(id: eatenFood[index].id, serving: eatenFood[index]);
+                                
                                 setState(() {});
+                                }
                               },
                               icon: Icon(Icons.remove),
                             ),
@@ -141,6 +150,7 @@ class _CalorieTrackerState extends State<CalorieTracker> {
                       onLongPress: () async{
                         await c.deleteServingRecord(id: eatenFood[index].id);
                         eatenFood.removeAt(index);
+                        createSavingDialog(context);
                          setState(() {
                           
                          });
@@ -158,5 +168,31 @@ class _CalorieTrackerState extends State<CalorieTracker> {
   }
   return LoadingScreen();
 });
-}}
+}
+
+Future <String> createSavingDialog(BuildContext context){
+    Timer(
+      Duration(seconds: 2),
+      () async{
+         Navigator.of(context).pop();
+      },
+    );
+    return showDialog(context: context, builder: (context){
+      return AlertDialog(
+        content: SizedBox(
+          height: 250,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget> [
+              CircularProgressIndicator(),
+              Text("Saving data... Please Wait")
+            ]
+          ),
+        ),
+      );
+
+    });
+  }
+
+}
 

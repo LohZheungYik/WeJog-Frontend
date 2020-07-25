@@ -3,20 +3,25 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 //dashboard screen step goal circle progress indicator
-class CircleProgressIndicator extends StatelessWidget {
-  final state;
-  CircleProgressIndicator({this.state});
-  
+class CircleProgressIndicator extends StatefulWidget {
+  final state, userData, stepCount;
+  CircleProgressIndicator({this.state, this.userData, this.stepCount});
+
+  @override
+  _CircleProgressIndicatorState createState() => _CircleProgressIndicatorState();
+}
+
+class _CircleProgressIndicatorState extends State<CircleProgressIndicator> {
   @override
   Widget build(BuildContext context) {
     
-    int percentage = ((state.stepCount/state.userData.stepGoal)*100).round();
+    int percentage = ((widget.stepCount/widget.userData.stepGoal)*100).round();
     double percentageDecimal = percentage/100;
 
     return CircularPercentIndicator(
       radius: 200.0,
       lineWidth: 30.0,
-      percent: percentageDecimal > 1?1:percentageDecimal, //prevent error if the step number exceeded the goal 
+      percent: percentageDecimal > 1 || percentageDecimal < 0?1:percentageDecimal, //prevent error if the step number exceeded the goal 
       center: Center(
         child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -28,7 +33,7 @@ class CircleProgressIndicator extends StatelessWidget {
                 )
               ),
               //Text("7000/10000 steps")
-              Text(state.stepCount.toString() + "/${state.userData.stepGoal} steps") //step progress text
+              Text(widget.stepCount.toString() + "/${widget.userData.stepGoal} steps") //step progress text
           ],
          ),
         ),
@@ -49,7 +54,7 @@ class ProgressBar extends StatelessWidget {
       LinearPercentIndicator(
         width: 240.0,
         lineHeight: 14.0,
-        percent: percent > 1?1:percent,
+        percent: percent > 1|| percent < 0?1:percent,
         backgroundColor: Colors.grey,
         progressColor: progressColor,
       ),

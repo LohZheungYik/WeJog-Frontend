@@ -46,8 +46,11 @@ class _SettingsState extends State<Settings> {
           title: Text("Settings"),
           leading: IconButton(icon: Icon(
             Icons.arrow_back
-          ), onPressed: (){
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Dashboard(userId: widget.user.userId,)));
+          ), onPressed: () async{
+            UserDataService u = UserDataService();
+            User userData = new User();
+            userData = await u.getUserDetail(userId: widget.user.userId);
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Dashboard(userId: widget.user.userId, userData: userData,)));
           }),
         ),
         body: Column(

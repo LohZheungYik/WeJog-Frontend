@@ -34,6 +34,7 @@ _Note:_
 ## User credential (username and passwords) to test out your app:
 
 1. user's credential:
+<br>
 Email: WeJogTest@gmail.com
 <br>
 Password: WeJog123

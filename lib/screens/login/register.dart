@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wejog1/model/user.dart';
 import 'package:wejog1/screens/home/app_bar.dart';
-import 'package:wejog1/screens/home/dashboard.dart';
+import 'package:wejog1/screens/login/login.dart';
 import 'package:wejog1/screens/login/provider.dart';
 import 'package:wejog1/services/user_data_service.dart';
 import 'package:wejog1/widgets/registration_widgets.dart';
@@ -143,6 +143,9 @@ class _RegisterState extends State<Register> {
                         birthYear: int.parse(birthYearController.text),
                         height: int.parse(heightController.text),
                         weight: int.parse(weightController.text),
+                        stepGoal: 10000,
+                        distanceGoal: 700,
+                        calorieGoal: 100,
                       );
                     
                       submitRegistration(user, passwordController.text, context);
@@ -181,7 +184,7 @@ class _RegisterState extends State<Register> {
 
       print(userId + "registered");
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => Dashboard(userId: userId)),
+        MaterialPageRoute(builder: (context) => Login()),
       );
     }catch(e){
       //print(e);

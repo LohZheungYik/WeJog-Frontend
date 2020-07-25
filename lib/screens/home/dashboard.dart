@@ -10,8 +10,8 @@ import 'package:pedometer/pedometer.dart';
 import 'package:wejog1/widgets/dashboard_widgets.dart';
 
 class Dashboard extends StatefulWidget {
-  final userId;
-  Dashboard({this.userId});
+  final userId, userData;
+  Dashboard({this.userId, this.userData});
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -34,18 +34,22 @@ class _DashboardState extends State<Dashboard> {
   static var dateTime = DateTime.now();
   String date = dateFormat.format(dateTime);
 
-  User userData = new User();
+  //User userData = new User();
   
   @override
   void initState(){
+    
     super.initState();
+    //getUserData();
     initPlatformState();
+    
+    
   }
 
-void getUserData() async{
-    UserDataService u = UserDataService();
-    userData = await u.getUserDetail(userId: widget.userId);
-}
+// void getUserData() async{
+//     UserDataService u = UserDataService();
+//     userData = await u.getUserDetail(userId: widget.userId);
+// }
 
 Future<void> initPlatformState() async {
   startListening();
@@ -120,17 +124,17 @@ void _onData(int newValue) async {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    return FutureBuilder<User>(
-        future: userDataService.getUserDetail(userId: widget.userId),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            userData = snapshot.data;
+    // return FutureBuilder<User>(
+    //     future: userDataService.getUserDetail(userId: widget.userId),
+    //     builder: (context, snapshot) {
+    //       if (snapshot.hasData) {
+    //         userData = snapshot.data;
     
     return WillPopScope(
           onWillPop: ()async => false,
           child: Scaffold(
         //key: _scaffoldKey,
-        drawer: NavDrawer(userId: widget.userId, user: userData),
+        drawer: NavDrawer(userId: widget.userId, user: widget.userData),
         appBar: AppBar(
           backgroundColor: Colors.green[500],
           title: Text("WeJog"),
@@ -141,7 +145,7 @@ void _onData(int newValue) async {
       
           child: Column(
             children: <Widget>[
-              CircleProgressIndicator(state: this),
+              CircleProgressIndicator(userData: widget.userData, stepCount: stepCount),
               UseDirection(),        
             ],
           )
@@ -180,21 +184,21 @@ void _onData(int newValue) async {
                         height: 15
                       ),
                       ProgressText(
-                        progressText: "$_distanceValue out of ${userData.distanceGoal} m jogged",
+                        progressText: "$_distanceValue out of ${widget.userData.distanceGoal} m jogged",
                       ),
                       ProgressBar(
                         progressColor: Colors.teal,
-                        percent: _distanceValue / userData.distanceGoal,
+                        percent: _distanceValue / widget.userData.distanceGoal,
                       ),
                       SizedBox(
                         height: 15
                       ),
                       ProgressText(
-                        progressText: "$_calorieBurnt out of ${userData.calorieGoal} kCal burnt through jogging",
+                        progressText: "$_calorieBurnt out of ${widget.userData.calorieGoal} kCal burnt through jogging",
                       ),
                       ProgressBar(
                         progressColor: Colors.pinkAccent,
-                        percent: _calorieBurnt / userData.calorieGoal,
+                        percent: _calorieBurnt / widget.userData.calorieGoal,
                       ),
                       SizedBox(
                         height: 15
@@ -210,9 +214,9 @@ void _onData(int newValue) async {
        ),
       ),
     );
-  }
-    return _buildFetchingDataScreen();
-  });
+  // }
+  //   return _buildFetchingDataScreen();
+  // });
   }
 
   Scaffold _buildFetchingDataScreen() {

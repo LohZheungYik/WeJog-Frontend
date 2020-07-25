@@ -59,51 +59,50 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-          onWillPop: ()async => false,
-          child: Scaffold(
+    return Scaffold(
         appBar: WeJogAppBars.backBtnAppBar(context, "Add a consumed food"),
         body: Column(
-          children: <Widget>[
-            TextField(
-              controller: _textController,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(10, 0,0,0),
-                hintText: 'Type here to search',
-              ),
-            ),
-            MaterialButton(
-              color: Colors.blueAccent,
-              onPressed: (){
-                search(_textController.text);
-              },
-              child: Text("Search", style: TextStyle(
-                color: Colors.white
-              ),),
-            ),
-            Expanded(
-              child: SizedBox(
-              height: 340,
-              child: ListView.builder(
-                            
-              itemCount: dispList.length,
-              itemBuilder: (context, index){
-                return ListTile(
-                  title: Text(dispList[index].name),
-                  subtitle: dispList[index].calories.toString() == ""? Text(dispList[index].calories.toString() + " kCal per serving"): Text(""),
-                  onTap: (){
-                    Serving s = addFood(dispList[index]);
-                    Navigator.of(context).pop(s);
-                  },
-                );
-              }
-            ),
-          ),
+    children: <Widget>[
+      TextField(
+        controller: _textController,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(10, 0,0,0),
+          hintText: 'Type here to search',
+        ),
+      ),
+      MaterialButton(
+        color: Colors.blueAccent,
+        onPressed: (){
+          search(_textController.text);
+        },
+        child: Text("Search", style: TextStyle(
+          color: Colors.white
+        ),),
+      ),
+      Expanded(
+        child: SizedBox(
+        height: 340,
+        child: ListView.builder(
+                      
+        itemCount: dispList.length,
+        itemBuilder: (context, index){
+          return ListTile(
+            title: Text(dispList[index].name),
+            subtitle: dispList[index].name != ""? 
+              Text(dispList[index].calories.toString() + " kCal per serving"): 
+              Text(""),
+            onTap: (){
+              Serving s = addFood(dispList[index]);
+              Navigator.of(context).pop(s);
+            },
+          );
+        }
+      ),
+    ),
         )
       ],
   ),
-),
-    );
+);
 }
 
 Future <String> createSavingDialog(BuildContext context){

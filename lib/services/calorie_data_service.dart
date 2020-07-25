@@ -13,6 +13,7 @@ class CalorieDataService {
 
   CalorieDataService._constructor();
   final rest = RestService();
+  List<Serving>userFoodList = List<Serving>();
   
    Future<List<Serving>> getAllServings({String userId, String date}) async {
     final listJson = await rest.get('calorie');
@@ -21,7 +22,7 @@ class CalorieDataService {
         .map((itemJson) => ((itemJson['userId'] == userId) && (itemJson['date'] == date))?Serving.fromJson(itemJson):null)
         .toList();
 
-      List<Serving>userFoodList = List<Serving>();
+      
 
       for(int i=0; i<foodList.length; i++){
         if(foodList[i] != null){
@@ -31,9 +32,9 @@ class CalorieDataService {
         }
       }
 
-      return userFoodList;
+      
       }
-
+      return userFoodList;
    }
   
 

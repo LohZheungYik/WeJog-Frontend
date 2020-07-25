@@ -24,14 +24,14 @@ class TodoDataService {
 
   Future<List<Todo>> getTodoList({String userId}) async {
     final listJson = await rest.get('reminders');
-
+    List<Todo>userTodoList = List<Todo>();
     if(listJson != null){
       
       List<Todo> todoList = (listJson as List)
         .map((itemJson) => ((itemJson['userId'] == userId))?Todo.fromJson(itemJson):null)
         .toList();
 
-      List<Todo>userTodoList = List<Todo>();
+      
 
       for(int i=0; i<todoList.length; i++){
         if(todoList[i] != null){
@@ -41,8 +41,9 @@ class TodoDataService {
         }
       }
 
-      return userTodoList;
+      
     }
+    return userTodoList;
   }
 
   Future<Todo> updateTodo({Todo todo}) async {
